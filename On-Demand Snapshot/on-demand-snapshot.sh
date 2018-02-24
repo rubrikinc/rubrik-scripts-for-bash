@@ -13,7 +13,7 @@
 # USAGE: ./on-demand-snapshot.sh -c 192.168.45.5 -u admin -p mypassword -v vsphere_vm_name
 ########################################################################################################
 
-# Function to print the usage
+# Function to print the usage when called
 usage() { echo "$0 [-c <IP_ADDRESS>] [-u <USERNAME>] [optional -p <PASSWORD> ] [-v <VM_NAME>]" 1>&2; exit 1; }
 # Start of variables
 # Read variables
@@ -36,18 +36,20 @@ fi
 # End of variables
 
 printf '%s\n'
-# # check if password was enter in command arguments, if not prompt for password
+# check jq is installed
 if ! JQ_LOC="$(type -p jq)" || [ -z "$JQ_LOC" ]; then
   printf '%s\n' "The jq utility is not installed."
   printf '%s\n' "Install contructions can be found at https://stedolan.github.io/jq/download/"
   exit 1
 fi
+# check if password was enter in command arguments, if not prompt for password
 if [ -z $PASSWORD ]; then
   printf '%s' "Enter the $USERNAME password: "
   read -s PASSWORD
   echo
 fi
 
+# Convert username and password to HASH used by API
 AUTH_HASH=$(echo -n "$USERNAME:$PASSWORD" | openssl enc -base64)
 
 # Get the VM data to pull the ID from
