@@ -12,6 +12,10 @@ Create a On-Demand Snapshot of a vSphere VM.
 
 [jq - a lightweight and flexible command-line JSON processor.](https://stedolan.github.io/jq/download/)
 
+[openssl - create the Base64 encoding of username:password used for authentication](https://www.openssl.org/)
+
+[curl - call the Rubrik CDM RESTful API ](https://curl.haxx.se/)
+
 ## Example Output
 
 ```
